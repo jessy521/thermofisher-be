@@ -1,4 +1,5 @@
 import { Connection } from 'mongoose';
+import { catalogSchema } from './schema/catalog.schema';
 
 export const catalogProvider = [
   {
