@@ -18,5 +18,5 @@ export const ItemSchema = new mongoose.Schema({
     },
   ],
   launchDate: Date,
-  createdAt: Date,
+  createdAt: new Date(),
 });

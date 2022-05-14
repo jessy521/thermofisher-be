@@ -8,6 +8,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { ParticipantTrainingModule } from './participant_training/participant_training.module';
 
 @Module({
+
   imports: [ConfigModule.forRoot(), AuthModule, ParticipantModule, CurriculumModule, ItemModule, CatalogModule, ParticipantTrainingModule],
 })
 export class AppModule {}

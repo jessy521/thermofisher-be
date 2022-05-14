@@ -70,11 +70,4 @@ export class CreateItemDto {
     default: '',
   })
   launchDate: Date;
-
-  @ApiPropertyOptional({
-    type: String,
-    description: 'enter the created date',
-    default: '',
-  })
-  createdAt: Date;
 }
