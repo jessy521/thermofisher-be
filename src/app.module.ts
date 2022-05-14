@@ -6,6 +6,12 @@ import { CurriculumModule } from './curriculum/curriculum.module';
 import { ItemModule } from './item/item.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, ParticipantModule, CurriculumModule, ItemModule],
+  imports: [
+    ConfigModule.forRoot(),
+    AuthModule,
+    ParticipantModule,
+    CurriculumModule,
+    ItemModule,
+  ],
 })
 export class AppModule {}
