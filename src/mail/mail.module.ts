@@ -26,7 +26,7 @@ import { ConfigModule } from '@nestjs/config';
       },
       template: {
         dir: join(__dirname, 'templates'),
-        adapter: new HandlebarsAdapter(), 
+        adapter: new HandlebarsAdapter(),
         options: {
           strict: true,
         },
@@ -34,6 +34,6 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   providers: [MailService],
-  exports: [MailService], 
+  exports: [MailService],
 })
 export class MailModule {}
