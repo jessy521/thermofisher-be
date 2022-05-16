@@ -14,4 +14,5 @@ export const participantTrainingSchema = new mongoose.Schema({
   location: String,
   year: String,
   quater: String,
+  type: String,
 });

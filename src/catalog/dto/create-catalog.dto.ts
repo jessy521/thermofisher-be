@@ -13,4 +13,10 @@ export class CreateCatalogDto {
     default: [],
   })
   items: [ObjectId];
+
+  @ApiProperty({
+    description: 'Enter the type',
+    default: '',
+  })
+  type: string;
 }
