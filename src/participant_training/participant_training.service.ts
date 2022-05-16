@@ -46,7 +46,7 @@ export class ParticipantTrainingService {
   }
 
   async update(
-    id: number,
+    id: string,
     updateParticipantTrainingDto: UpdateParticipantTrainingDto,
   ) {
     try {
@@ -75,6 +75,26 @@ export class ParticipantTrainingService {
       }
     } catch (e) {
       throw new BadRequestException({ message: e.message });
+    }
+  }
+
+  async getNumberOfEnrolled(id: string) {
+    try {
+      if (id !== undefined) {
+        return this.participantTrainingModel.find({ curriculamId: id }).count();
+      }
+    } catch (error) {
+      throw new BadRequestException({ message: error.message });
+    }
+  }
+
+  async getNumberOfEnrolledAll() {
+    try {
+      return this.participantTrainingModel.aggregate([
+          { $group: { _id: '$curriculamId', count: { $sum: 1 } } },
+        ]);
+    } catch (error) {
+      throw new BadRequestException({ message: error.message });
     }
   }
 }
