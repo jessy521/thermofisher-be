@@ -15,8 +15,9 @@ export const ItemSchema = new mongoose.Schema({
     {
       type: Schema.Types.ObjectId,
       ref: Curriculum,
+      required: true,
     },
   ],
   launchDate: Date,
-  createdAt: new Date(),
+  createdAt: { type: Date, default: new Date() },
 });

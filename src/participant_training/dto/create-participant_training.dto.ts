@@ -31,4 +31,10 @@ export class CreateParticipantTrainingDto {
     default: 4,
   })
   quater: number;
+
+  @ApiProperty({
+    description: 'Enter the type',
+    default: '',
+  })
+  type: string;
 }

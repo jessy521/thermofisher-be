@@ -10,5 +10,5 @@ export const ParticipantSchema = new mongoose.Schema({
   manager: String,
   rNj: String,
   status: String,
-  createdAt: new Date(),
+  createdAt: { type: Date, default: new Date() },
 });

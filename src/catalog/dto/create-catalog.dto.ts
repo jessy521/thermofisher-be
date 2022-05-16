@@ -6,11 +6,17 @@ export class CreateCatalogDto {
     description: 'Enter the CurriculumId',
     default: [],
   })
-  curricullumId: [ObjectId];
+  curriculamId: [ObjectId];
 
   @ApiProperty({
     description: 'Enter item id',
     default: [],
   })
-  itemId: [ObjectId];
+  items: [ObjectId];
+
+  @ApiProperty({
+    description: 'Enter the type',
+    default: '',
+  })
+  type: string;
 }

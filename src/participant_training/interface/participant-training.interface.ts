@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongoose';
 
 export class participantTraining {
-  curriculamId: ObjectId;
-  participantId: ObjectId;
+  curriculamId: { type: ObjectId; required: true };
+  participantId: { type: ObjectId; required: true };
   location: string;
   year: number;
   quater: number;

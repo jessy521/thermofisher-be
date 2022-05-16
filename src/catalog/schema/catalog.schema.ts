@@ -3,6 +3,8 @@ import { Curriculum } from 'src/curriculum/interface/curriculum.interface';
 import { Item } from 'src/item/interface/item.interface';
 
 export const catalogSchema = new mongoose.Schema({
+
+  type: String,
   curriculamId: [
     {
       type: mongoose.Schema.Types.ObjectId,

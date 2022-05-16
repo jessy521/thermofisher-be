@@ -18,5 +18,5 @@ export const CurriculumSchema = new mongoose.Schema({
       ref: Item,
     },
   ],
-  createdAt: new Date(),
+  createdAt: { type: Date, default: new Date() },
 });
