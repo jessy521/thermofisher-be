@@ -13,7 +13,7 @@ export class UpdateCurriculumDto extends PartialType(CreateCurriculumDto) {
   @ApiPropertyOptional({
     type: Number,
     description: 'no of the curriculum',
-    default: '',
+    default: 1010,
   })
   curriculumNo: Number;
 

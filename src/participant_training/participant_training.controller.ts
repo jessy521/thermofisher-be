@@ -1,5 +1,6 @@
 import {
   Controller,
+  Query,
   Get,
   Post,
   Body,
@@ -11,8 +12,9 @@ import { ParticipantTrainingService } from './participant_training.service';
 import { CreateParticipantTrainingDto } from './dto/create-participant_training.dto';
 import { UpdateParticipantTrainingDto } from './dto/update-participant_training.dto';
 import { ApiForbiddenResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { GetFilterDto } from './dto/get-filter.dto';
 
-@ApiTags('Participant-Training')
+@ApiTags('Participant-training')
 @Controller('participant-training')
 export class ParticipantTrainingController {
   constructor(
@@ -29,15 +31,18 @@ export class ParticipantTrainingController {
   @Get()
   @ApiOkResponse({ description: 'this response has returned successfully' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
-  findAll() {
-    return this.participantTrainingService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOkResponse({ description: 'this response has returned successfully' })
-  @ApiForbiddenResponse({ description: 'Forbidden' })
-  findOne(@Param('id') id: string) {
-    return this.participantTrainingService.findOne(id);
+  findAll(@Query() filterDto: GetFilterDto) {
+    if (filterDto.id !== undefined) {
+      return this.participantTrainingService.findOne(filterDto.id);
+    } else if (filterDto.curriculumId !== undefined) {
+      return this.participantTrainingService.getNumberOfEnrolled(
+        filterDto.curriculumId,
+      );
+    } else if (filterDto.category === 'all') {
+      return this.participantTrainingService.getNumberOfEnrolledAll();
+    } else {
+      return this.participantTrainingService.findAll();
+    }
   }
 
   @Patch(':id')
@@ -46,7 +51,7 @@ export class ParticipantTrainingController {
     @Body() updateParticipantTrainingDto: UpdateParticipantTrainingDto,
   ) {
     return this.participantTrainingService.update(
-      +id,
+      id,
       updateParticipantTrainingDto,
     );
   }

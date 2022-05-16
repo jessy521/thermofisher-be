@@ -58,9 +58,9 @@ export class CreateItemDto {
   owner: string;
 
   @ApiPropertyOptional({
-    type: String,
+    type: [String],
     description: 'enter the curriculum Ids',
-    default: '',
+    default: [''],
   })
   curriculumId: [string];
 

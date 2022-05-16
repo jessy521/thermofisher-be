@@ -11,7 +11,7 @@ export class CreateCurriculumDto {
   @ApiPropertyOptional({
     type: Number,
     description: 'no of the curriculum',
-    default: '',
+    default: 23,
   })
   curriculumNo: Number;
 
