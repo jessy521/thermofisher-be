@@ -1,26 +1,80 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Model } from 'mongoose';
 import { CreateParticipantTrainingDto } from './dto/create-participant_training.dto';
 import { UpdateParticipantTrainingDto } from './dto/update-participant_training.dto';
+import { participantTraining } from './interface/participant-training.interface';
 
 @Injectable()
 export class ParticipantTrainingService {
-  create(createParticipantTrainingDto: CreateParticipantTrainingDto) {
-    return 'This action adds a new participantTraining';
+  constructor(
+    @Inject('PARTICIPANT-TRAINING_MODEL')
+    private participantTrainingModel: Model<participantTraining>,
+  ) {}
+
+  async create(createParticipantTrainingDto: CreateParticipantTrainingDto) {
+    try {
+      const newTraining = new this.participantTrainingModel(
+        createParticipantTrainingDto,
+      );
+      await newTraining.save();
+      return newTraining;
+    } catch (e) {
+      throw new BadRequestException({ message: e.message });
+    }
   }
 
   findAll() {
-    return `This action returns all participantTraining`;
+    return this.participantTrainingModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} participantTraining`;
+  async findOne(id: string) {
+    try {
+      const training = await this.participantTrainingModel.findOne({ _id: id });
+      if (training !== undefined) {
+        return training;
+      } else {
+        throw new NotFoundException();
+      }
+    } catch (e) {
+      throw new BadRequestException({ message: e.message });
+    }
   }
 
-  update(id: number, updateParticipantTrainingDto: UpdateParticipantTrainingDto) {
-    return `This action updates a #${id} participantTraining`;
+  async update(
+    id: number,
+    updateParticipantTrainingDto: UpdateParticipantTrainingDto,
+  ) {
+    try {
+      const training = await this.participantTrainingModel.findOne({ _id: id });
+      if (training !== undefined) {
+        return this.participantTrainingModel.findByIdAndUpdate(
+          { _id: id },
+          updateParticipantTrainingDto,
+          { new: true },
+        );
+      } else {
+        throw new NotFoundException();
+      }
+    } catch (e) {
+      throw new BadRequestException({ message: e.message });
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} participantTraining`;
+  async remove(id: string) {
+    try {
+      const training = await this.participantTrainingModel.findOne({ _id: id });
+      if (training !== undefined) {
+        return this.participantTrainingModel.findByIdAndDelete({ _id: id });
+      } else {
+        throw new NotFoundException();
+      }
+    } catch (e) {
+      throw new BadRequestException({ message: e.message });
+    }
   }
 }
